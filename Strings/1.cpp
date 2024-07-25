@@ -3,16 +3,12 @@ using namespace std;
 
 int main()
 {
-    string name;
-    cin >> name;
-    cout << "Printing name: " << name << endl;
+    string str1 = "Abhijit";
+    string str2 = "Manna";
 
-    int index = 0;
-    while (name[index] != '\0')
-    {
-        cout << "index: " << index << " character: " << name[index] << endl;
-        index++;
-    }
-
+    if (str1.find(str2) == string::npos)
+        cout << "Not Found" << endl;
+    else
+        cout << "Found" << endl;
     return 0;
 }
