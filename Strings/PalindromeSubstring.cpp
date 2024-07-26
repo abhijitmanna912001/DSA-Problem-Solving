@@ -28,6 +28,5 @@ int countSubstrings(string s)
 
 int main()
 {
-
     return 0;
 }
