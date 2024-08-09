@@ -18,6 +18,7 @@ void printArray(vector<int> &arr)
 
 int main()
 {
-
+    vector<int> myArray = {2, 3, 5, 5};
+    printArray(myArray);
     return 0;
 }
