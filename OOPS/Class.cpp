@@ -70,6 +70,12 @@ public:
         this->gf = gf;
     }
 
+    Student(const Student &srcobj)
+    {
+        this->name = srcobj.name;
+        this->age = srcobj.age;
+    }
+
     void study()
     {
         cout << "studying" << endl;
