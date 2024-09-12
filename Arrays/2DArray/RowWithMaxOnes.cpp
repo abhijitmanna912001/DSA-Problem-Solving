@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 vector<int> rowAndMaximumOnes(vector<vector<int>> &mat)
