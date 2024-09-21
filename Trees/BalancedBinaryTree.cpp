@@ -14,33 +14,54 @@ struct TreeNode
 class Solution
 {
 public:
+    // Bottom Up Approach
+    bool isbalanced = true;
     int height(TreeNode *root)
     {
-        if (root == NULL)
+        if (!root)
             return 0;
-        int leftHeight = height(root->left);
-        int rightHeight = height(root->right);
-        int finalAns = max(leftHeight, rightHeight) + 1;
-        return finalAns;
+        int lh = height(root->left);
+        int rh = height(root->right);
+
+        if (isbalanced && abs(lh - rh) > 1)
+            isbalanced = false;
+        return max(lh, rh) + 1;
     }
 
     bool isBalanced(TreeNode *root)
     {
-        if (root == NULL)
-            return true;
-        int leftHeight = height(root->left);
-        int rightHeight = height(root->right);
-        int diff = abs(leftHeight - rightHeight);
-
-        bool currNodeAns = (diff <= 1);
-        bool leftAns = isBalanced(root->left);
-        bool rightAns = isBalanced(root->right);
-
-        if (currNodeAns && leftAns && rightAns)
-            return true;
-        else
-            return false;
+        height(root);
+        return isbalanced;
     }
+
+    // Recursion Way Approach
+    // int height(TreeNode *root)
+    // {
+    //     if (root == NULL)
+    //         return 0;
+    //     int leftHeight = height(root->left);
+    //     int rightHeight = height(root->right);
+    //     int finalAns = max(leftHeight, rightHeight) + 1;
+    //     return finalAns;
+    // }
+
+    // bool isBalanced(TreeNode *root)
+    // {
+    //     if (root == NULL)
+    //         return true;
+    //     int leftHeight = height(root->left);
+    //     int rightHeight = height(root->right);
+    //     int diff = abs(leftHeight - rightHeight);
+
+    //     bool currNodeAns = (diff <= 1);
+    //     bool leftAns = isBalanced(root->left);
+    //     bool rightAns = isBalanced(root->right);
+
+    //     if (currNodeAns && leftAns && rightAns)
+    //         return true;
+    //     else
+    //         return false;
+    // }
 };
 
 int main()
