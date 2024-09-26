@@ -185,54 +185,75 @@ Node *deleteFromBST(Node *root, int target)
     return root;
 }
 
+Node *BSTFromInOrder(int inOrder[], int start, int end)
+{
+    if (start > end)
+        return NULL;
+    int mid = (start + end) / 2;
+    int element = inOrder[mid];
+    Node *root = new Node(element);
+
+    root->left = BSTFromInOrder(inOrder, start, mid - 1);
+    root->right = BSTFromInOrder(inOrder, mid + 1, end);
+    return root;
+}
+
 int main()
 {
-    Node *root = NULL;
-    createBST(root);
-    levelOrderTraversal(root);
-    cout << endl
-         << "Inorder Traversal: ";
-    inOrder(root);
-    cout << endl
-         << "Preorder Traversal: ";
-    preOrder(root);
-    cout << endl
-         << "Postorder Traversal: ";
-    postOrder(root);
-    Node *minNode = minValue(root);
-    Node *maxNode = maxValue(root);
-    if (minNode == NULL)
-        cout << endl
-             << "Minimum value in BST: -1 (Tree is empty)" << endl;
-    else
-        cout << endl
-             << "Minimum value in BST: " << minNode->data << endl;
-    if (maxNode == NULL)
-        cout << endl
-             << "Maximum value in BST: -1 (Tree is empty)" << endl;
-    else
-        cout << endl
-             << "Maximum value in BST: " << maxNode->data << endl;
-    int t;
-    cin >> t;
-    while (t != -1)
-    {
-        bool ans = searchInBST(root, t);
-        if (ans == true)
-            cout << "Found" << endl;
-        else
-            cout << "Not Found" << endl;
-        cin >> t;
-    }
+    // Node *root = NULL;
+    // createBST(root);
+    // levelOrderTraversal(root);
+    // cout << endl
+    //      << "Inorder Traversal: ";
+    // inOrder(root);
+    // cout << endl
+    //      << "Preorder Traversal: ";
+    // preOrder(root);
+    // cout << endl
+    //      << "Postorder Traversal: ";
+    // postOrder(root);
+    // Node *minNode = minValue(root);
+    // Node *maxNode = maxValue(root);
+    // if (minNode == NULL)
+    //     cout << endl
+    //          << "Minimum value in BST: -1 (Tree is empty)" << endl;
+    // else
+    //     cout << endl
+    //          << "Minimum value in BST: " << minNode->data << endl;
+    // if (maxNode == NULL)
+    //     cout << endl
+    //          << "Maximum value in BST: -1 (Tree is empty)" << endl;
+    // else
+    //     cout << endl
+    //          << "Maximum value in BST: " << maxNode->data << endl;
+    // int t;
+    // cin >> t;
+    // while (t != -1)
+    // {
+    //     bool ans = searchInBST(root, t);
+    //     if (ans == true)
+    //         cout << "Found" << endl;
+    //     else
+    //         cout << "Not Found" << endl;
+    //     cin >> t;
+    // }
 
-    int target;
-    cin >> target;
-    while (target != -1)
-    {
-        root = deleteFromBST(root, target);
-        levelOrderTraversal(root);
-        cin >> target;
-    }
+    // int target;
+    // cin >> target;
+    // while (target != -1)
+    // {
+    //     root = deleteFromBST(root, target);
+    //     levelOrderTraversal(root);
+    //     cin >> target;
+    // }
+
+    int inOrder[] = {10, 20, 30, 40, 50, 60, 70};
+    int size = 7;
+    int start = 0;
+    int end = size - 1;
+
+    Node *root = BSTFromInOrder(inOrder, start, end);
+    levelOrderTraversal(root);
 
     return 0;
 }
