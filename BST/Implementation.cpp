@@ -198,6 +198,31 @@ Node *BSTFromInOrder(int inOrder[], int start, int end)
     return root;
 }
 
+void convertBSTtoSortedDLL(Node *root, Node *&head)
+{
+    if (root == NULL)
+        return;
+    convertBSTtoSortedDLL(root->right, head);
+
+    root->right = head;
+    if (head != NULL)
+        head->left = root;
+    head = root;
+
+    convertBSTtoSortedDLL(root->left, head);
+}
+
+void printDLL(Node *head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << "->";
+        temp = temp->right;
+    }
+    cout << endl;
+}
+
 int main()
 {
     // Node *root = NULL;
@@ -247,13 +272,16 @@ int main()
     //     cin >> target;
     // }
 
-    int inOrder[] = {10, 20, 30, 40, 50, 60, 70};
-    int size = 7;
+    int inOrder[] = {25, 12, 30, 10, 36, 15};
+    int size = 6;
     int start = 0;
     int end = size - 1;
 
     Node *root = BSTFromInOrder(inOrder, start, end);
     levelOrderTraversal(root);
+    Node *head = NULL;
+    convertBSTtoSortedDLL(root, head);
+    printDLL(head);
 
     return 0;
 }
