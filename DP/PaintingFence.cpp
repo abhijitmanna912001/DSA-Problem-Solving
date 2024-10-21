@@ -9,12 +9,13 @@ public:
 
     long long solveUsingSpaceOptimise(int n, int k)
     {
-        if (n == 1)
-            return k;
-        if (n == 2)
-            return (1LL * k * k) % MOD;
         long long prev2 = k;
         long long prev1 = (1LL * k * k) % MOD;
+
+        if (n == 1)
+            return prev2;
+        if (n == 2)
+            return prev1;
 
         long long curr;
         for (int i = 3; i <= n; i++)
