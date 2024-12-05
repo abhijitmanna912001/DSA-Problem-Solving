@@ -6,33 +6,24 @@ class Solution
 public:
     int minimumDays(int S, int N, int M)
     {
-        // Total food required to survive for S days
-        int totalFoodRequired = S * M;
+        int sunday = S / 7;
+        int buyingDays = S - sunday;
+        int totalFood = S * M;
+        int ans = 0;
 
-        // Check if survival is impossible
-        // Weekly food requirement vs max purchasable food for 6 days
-        int weeklyFoodRequirement = 7 * M;
-        int maxWeeklyFoodPurchasable = 6 * N;
-
-        if ((weeklyFoodRequirement > maxWeeklyFoodPurchasable && S > 6) || M > N)
-        {
-            // Impossible to survive if:
-            // - Weekly requirement exceeds max purchasable for a week (when S > 6)
-            // - Daily requirement exceeds max purchasable in one day
+        if (S >= 7 && 7 * M >= 6 * N)
             return -1;
-        }
 
-        // Calculate minimum days to buy food
-        if (totalFoodRequired % N == 0)
-        {
-            // Exact division: no extra day needed
-            return totalFoodRequired / N;
-        }
+        if (totalFood % N == 0)
+            ans = totalFood / N;
         else
-        {
-            // Extra day needed to cover the remainder
-            return (totalFoodRequired / N) + 1;
-        }
+            ans = totalFood / N + 1;
+
+        if (ans <= buyingDays)
+            return ans;
+
+        else
+            return -1;
     }
 };
 
