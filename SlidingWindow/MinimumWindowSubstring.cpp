@@ -18,7 +18,7 @@ public:
         for (char ch : t)
             tCount[ch]++;
 
-        int count = 0;
+        int count = 0, end = 0;
         for (int i = 0; i < s.length(); i++)
         {
             char ch = s[i];
@@ -29,10 +29,9 @@ public:
 
             if (count == len2)
             {
-                while (sCount[s[idx]] > tCount[s[idx]] || tCount[s[idx]] == 0)
+                while (sCount[s[idx]] > tCount[s[idx]])
                 {
-                    if (sCount[s[idx]] > tCount[s[idx]])
-                        sCount[s[idx]]--;
+                    sCount[s[idx]]--;
                     idx++;
                 }
 
@@ -43,6 +42,7 @@ public:
                     ansIdx = idx;
                 }
             }
+            end++;
         }
 
         if (ansIdx == -1)
