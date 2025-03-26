@@ -6,6 +6,29 @@ using namespace std;
 class Solution
 {
 public:
+    // M4- Boundary Substring Bottom Up DP
+    int wordBreak(string &s, vector<string> &dictionary) {
+        unordered_set<string> wordSet(dictionary.begin(), dictionary.end());
+        int n = s.size();
+        
+        vector<bool> dp(n + 1, false);
+        dp[0] = true;
+        
+        int maxWordLen = 0;
+        for(string &word : dictionary)
+            maxWordLen = max(maxWordLen, (int)word.size());
+            
+        for(int i = 1; i <= n; i++) {
+            for(int j = max(0, i - maxWordLen); j < i; j++) {
+                if(dp[j] && wordSet.count(s.substr(j, i - j))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[n];
+    }
+
     // M3 - Using Set and dp
     bool solveByMemo(string &s, unordered_set<string> &wordSet, int start,
                      vector<int> &dp)
